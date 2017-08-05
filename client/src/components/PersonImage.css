@@ -1,0 +1,7 @@
+.PersonImage{
+	background-size: cover;
+	margin-right: 8px;
+	border-radius: 50%;
+  background-position: center;
+	background-color: #E0E0E0;
+}

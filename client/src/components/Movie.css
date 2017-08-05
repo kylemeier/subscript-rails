@@ -1,0 +1,20 @@
+.Movie{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Movie-title{
+  font-size: 1em;
+}
+
+.Movie-role{
+  font-size: 0.8em;
+}
+
+.Movie-showtimeLink{
+  margin-left: auto;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #0091EA;
+}

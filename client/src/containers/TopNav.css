@@ -1,0 +1,22 @@
+.TopNav{
+  color: #fafafa;
+  background: #03A9F4;
+  height: 50px;
+  display: flex;
+  /*justify-content: flex-s;*/
+  align-items: center;
+  padding: 0 8px;
+}
+
+.TopNav-linkList{
+  display: flex;
+  flex: 1;
+}
+
+.TopNav-linkList-item{
+  margin-left: 8px;
+}
+
+.TopNav-linkList-item:first-child{
+  flex: 1;
+}

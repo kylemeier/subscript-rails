@@ -1,0 +1,15 @@
+/*Light Blue material theme*/
+.App{
+	background: #63474D;
+	background: #B3E5FC;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position:absolute;
+	color: #F4F1DE;
+	color: #000;
+	font-family: 'Open Sans', sans-serif;
+	overflow: hidden;
+	font-size: 16px;
+}

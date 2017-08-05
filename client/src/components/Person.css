@@ -1,0 +1,27 @@
+.Person{
+  display: flex;
+	flex-direction: row;
+	color:#212121;
+  background: inherit;
+  align-items: center;
+  padding: 8px;
+  width: 100%;
+}
+
+
+.Person-name{
+	font-size: 1em;
+}
+
+.Person:nth-child(odd){
+	background: #F5F5F5;
+}
+
+.Person:nth-child(even){
+	background: #EEE;
+}
+
+.Person:hover{
+  background: #E0E0E0;
+}
+

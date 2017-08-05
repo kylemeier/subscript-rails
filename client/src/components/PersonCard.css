@@ -1,0 +1,44 @@
+/*https://s-media-cache-ak0.pinimg.com/736x/33/67/53/33675303438f8334e333c63441ba9732.jpg*/
+.PersonCard{
+  background: #fafafa;
+  border-radius: 4px 4px 0 0;
+  color:#424242;;
+  width: 500px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+}
+
+.PersonCard-name{
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.PersonCard-slideUp-enter,
+.PersonCard-slideUp-appear{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  transition: all 200ms ease-out;
+  transition-delay: 100ms;
+  opacity: 0;
+}
+
+.PersonCard-slideUp-enter.PersonCard-slideUp-enter-active,
+.PersonCard-slideUp-appear.PersonCard-slideUp-appear-active{
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+.PersonCard-slideUp-leave{
+  transform: translate(0, 0%);
+  transition: all 200ms ease-out;
+  opacity: 1;
+}
+
+.PersonCard-slideUp-leave.PersonCard-slideUp-leave-active{
+  transform: translate(0, 10%);
+  opacity: 0;
+}
