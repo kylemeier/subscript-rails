@@ -1,22 +1,31 @@
 import React from "react";
+import { connect } from "react-redux";
 import Person from "./Person";
 import "./PeopleDropDown.css";
 
-function PeopleDropDown(props) {
-  const { people, handleClick } = props;
-
-  return (
-    <ul className="PeopleDropDown">
-      {people.map(person => (
-        <Person key={person.id} person={person} handleClick={handleClick} />
-      ))}
-    </ul>
-  );
+class PeopleDropDown extends React.Component {
+  render() {
+    const { stateType, people } = this.props;
+    switch (stateType) {
+      case "ready":
+        return (
+          <ul className="PeopleDropDown">
+            {people.map(person => (
+              <Person key={person.id} person={person} />
+            ))}
+          </ul>
+        );
+      default:
+        return null;
+    }
+  }
 }
 
-// PeopleDropDown.propTypes = {
-// 	people: PropTypes.array.isRequired,
-// 	handleClick: PropTypes.func.isRequired,
-// };
+const mapStateToProps = ({ people }) => {
+  return {
+    stateType: people.type,
+    people: people.people
+  };
+};
 
-export default PeopleDropDown;
+export default connect(mapStateToProps)(PeopleDropDown);

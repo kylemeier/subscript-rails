@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import movies from "./movies";
-import people from "../ducks/people";
-import { stateMachineReducer } from "../statemachine/test";
+import people from "../people";
 
 const reducers = combineReducers({
   movies,
-  people,
-  stateMachineReducer
+  people
 });
 
 export default reducers;

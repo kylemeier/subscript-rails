@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { debounce } from "lodash";
-import { getPeople, selectPerson, deactivate, activate } from "../ducks/people";
+import {
+  getPeople,
+  selectPerson,
+  deactivate,
+  activate
+} from "../people/actions";
 import fetchMovies from "../actions/fetchMovies";
 import PeopleDropDown from "../components/PeopleDropDown";
 import "./FindPersonForm.css";
@@ -84,13 +89,7 @@ class FindPersonForm extends React.Component {
                 this.input = node;
               }}
             />
-            {this.props.stateType === "ready" && (
-              <PeopleDropDown
-                stateType={this.props.stateType}
-                handleClick={this.handlePersonSelected}
-                people={this.props.people}
-              />
-            )}
+            <PeopleDropDown />
           </div>
           <button className="FindPersonForm-btn" type="submit">
             <i className="material-icons flex">search</i>
@@ -101,12 +100,4 @@ class FindPersonForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ people }) => {
-  return {
-    stateType: people.type,
-    selectedPerson: people.selectedPerson,
-    people: people.people
-  };
-};
-
-export default connect(mapStateToProps)(FindPersonForm);
+export default connect()(FindPersonForm);

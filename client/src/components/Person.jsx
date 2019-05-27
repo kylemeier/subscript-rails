@@ -1,16 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import { selectPerson } from "../people/actions";
 import "./Person.css";
 import PersonImage from "./PersonImage";
 
 class Person extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    this.props.handleClick(e, this.props.person);
-  }
+  handleClick = () => {
+    this.props.dispatch(selectPerson(this.props.person));
+  };
 
   render() {
     const { name, profile_path } = this.props.person;
@@ -26,8 +23,4 @@ class Person extends React.Component {
   }
 }
 
-// Person.propTypes = {
-// 	person: PropTypes.object.isRequired
-// };
-
-export default Person;
+export default connect()(Person);
