@@ -2,28 +2,51 @@
   "name": "subscript",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react-dom": "^16.8.4"
+  },
   "dependencies": {
-    "custom-react-scripts": "0.0.23",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.2",
+    "@types/react": "^16.8.18",
+    "@types/react-redux": "^7.0.9",
+    "@types/react-router": "^5.0.1",
+    "@types/react-router-dom": "^4.3.3",
     "firebase": "^3.6.10",
     "lodash": "^4.17.4",
     "mobx": "^3.2.1",
     "mobx-react": "^4.2.2",
     "moment": "^2.17.1",
     "normalize.css": "^5.0.0",
-    "react": "^15.4.2",
+    "react": "^16.8.2",
     "react-addons-css-transition-group": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react-dom": "^16.8.2",
     "react-redux": "^5.0.1",
-    "react-router": "^3.0.2",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
     "redux": "^3.6.0",
     "redux-api-middleware": "^1.0.2",
-    "redux-thunk": "^2.1.0"
+    "redux-automata": "^2.5.2",
+    "redux-thunk": "^2.1.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "custom-react-scripts build",
-    "test": "custom-react-scripts test --env=jsdom",
-    "eject": "custom-react-scripts eject"
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

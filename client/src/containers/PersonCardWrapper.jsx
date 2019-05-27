@@ -1,41 +1,38 @@
-import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { connect } from 'react-redux';
+import React from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { connect } from "react-redux";
 
-import savePerson from '../actions/savePerson';
-
-import PersonCard from '../components/PersonCard';
-import './PersonCardWrapper.css';
+import PersonCard from "../components/PersonCard";
+import "./PersonCardWrapper.css";
 
 class PersonCardWrapper extends React.Component {
-  
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleSave(id){
-    console.log('handle save', id);
-    this.props.dispatch(savePerson(id));
+  handleSave(id) {
+    console.log("handle save does nothing right now", id);
+    // this.props.dispatch(savePerson(id));
   }
 
-  render(){
-    const {movies, selectedPerson} = this.props;
+  render() {
+    const { movies, selectedPerson } = this.props;
     //use an array to allow cards to switch out rather than replace the contents
     //of one card
-    const selectedPersonIDArray = selectedPerson.id? [selectedPerson.id] : [];
+    const selectedPersonIDArray = selectedPerson ? [selectedPerson.id] : [];
 
-    const cards = selectedPersonIDArray.map( id=> (
-      <PersonCard 
-        key={id} 
-        person={selectedPerson} 
-        movies={movies} 
+    const cards = selectedPersonIDArray.map(id => (
+      <PersonCard
+        key={id}
+        person={selectedPerson}
+        movies={movies}
         handleSave={this.handleSave}
       />
     ));
-    
-    return(
+
+    return (
       <div className="PersonCardWrapper">
         <ReactCSSTransitionGroup
           transitionName="PersonCard-slideUp"
@@ -51,7 +48,7 @@ class PersonCardWrapper extends React.Component {
   }
 }
 
-const mapStateToProps = ({movies, people}) => {
+const mapStateToProps = ({ movies, people }) => {
   return {
     movies: movies.items,
     selectedPerson: people.selectedPerson

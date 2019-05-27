@@ -4,20 +4,22 @@ import "../utils/defaults.css";
 import TopNav from "../containers/TopNav";
 import FindPersonForm from "../containers/FindPersonForm";
 import PersonCardWrapper from "../containers/PersonCardWrapper";
-import FindPersonFormAndResultsWrapper from "../components/FindPersonFormAndResultsWrapper";
-import SignInModal from "../containers/SignInModal";
-import MobxTest from "../components/MobxTest";
-import mobxStore from "../mobx/store";
+import FindPersonFormAndResultsWrapper from "./FindPersonFormAndResultsWrapper";
+// import SignInModal from "../containers/SignInModal";
+import TSTest from "../components/TSTest";
 import "./App.css";
+import StateMachineTest from "../containers/StateMachineTest";
 
-const App = () =>
+const App = () => (
   <div className="App">
     <TopNav />
-    <MobxTest store={mobxStore} />
+    <StateMachineTest />
+    <TSTest />
     <FindPersonFormAndResultsWrapper>
       <FindPersonForm />
       <PersonCardWrapper />
     </FindPersonFormAndResultsWrapper>
-  </div>;
+  </div>
+);
 
 export default App;

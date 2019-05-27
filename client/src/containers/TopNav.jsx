@@ -1,22 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import database from '../data/firebase';
+import database from "../data/firebase";
 
-import './TopNav.css';
+import "./TopNav.css";
 
-class TopNav extends React.Component{
-
-  componentDidMount(){
-    console.log('mounted', database);
-    database.ref('/').once('value', snap =>{
-      console.log('here');
+class TopNav extends React.Component {
+  componentDidMount() {
+    console.log("mounted", database);
+    database.ref("/").once("value", snap => {
+      console.log("here");
       console.log(snap.val());
     });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="TopNav">
         <ul className="TopNav-linkList">
           <li className="TopNav-linkList-item">
@@ -30,7 +29,7 @@ class TopNav extends React.Component{
           </li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
