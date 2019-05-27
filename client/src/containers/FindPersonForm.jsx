@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { debounce } from "lodash";
-import { getPeople, selectPerson, State } from "../ducks/people";
+import { getPeople, selectPerson, deactivate, activate } from "../ducks/people";
 import fetchMovies from "../actions/fetchMovies";
 import PeopleDropDown from "../components/PeopleDropDown";
 import "./FindPersonForm.css";
@@ -10,15 +10,10 @@ import "../utils/layout.css";
 class FindPersonForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isInputFocused: null
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePersonSelected = this.handlePersonSelected.bind(this);
     this.handleInputFocus = this.handleInputFocus.bind(this);
     this.handleInputBlur = this.handleInputBlur.bind(this);
-    this.dropDownShouldShow = this.dropDownShouldShow.bind(this);
     this.fetchPeopleFromInput = this.fetchPeopleFromInput.bind(this);
     this.prevInputValue = "";
 
@@ -34,29 +29,23 @@ class FindPersonForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const nextSelectedPersonID = nextProps.selectedPerson
-      ? nextProps.selectedPerson.id
-      : null;
-    const currentSelectedPersonID = this.props.selectedPerson
-      ? this.props.selectedPerson.id
-      : null;
-    if (
-      nextSelectedPersonID &&
-      nextSelectedPersonID !== currentSelectedPersonID
-    )
-      this.props.dispatch(fetchMovies(nextSelectedPersonID));
+    // const nextSelectedPersonID = nextProps.selectedPerson
+    //   ? nextProps.selectedPerson.id
+    //   : null;
+    // const currentSelectedPersonID = this.props.selectedPerson
+    //   ? this.props.selectedPerson.id
+    //   : null;
+    // if (this.props.stateType === "person-selected") {
+    // this.props.dispatch(fetchMovies(nextProps.selectedPerson.id));
+    // }
   }
 
   handleInputFocus() {
-    this.setState({
-      isInputFocused: true
-    });
+    this.props.dispatch(activate());
   }
 
   handleInputBlur() {
-    this.setState({
-      isInputFocused: false
-    });
+    this.props.dispatch(deactivate());
   }
 
   handleSubmit(e, id) {
@@ -66,14 +55,6 @@ class FindPersonForm extends React.Component {
 
   handlePersonSelected(e, person) {
     this.props.dispatch(selectPerson(person));
-  }
-
-  dropDownShouldShow() {
-    return (
-      this.state.isInputFocused &&
-      this.props.stateType === "ready" &&
-      this.input.value.trim().length > 0
-    );
   }
 
   fetchPeopleFromInput() {
@@ -103,8 +84,9 @@ class FindPersonForm extends React.Component {
                 this.input = node;
               }}
             />
-            {this.dropDownShouldShow() && (
+            {this.props.stateType === "ready" && (
               <PeopleDropDown
+                stateType={this.props.stateType}
                 handleClick={this.handlePersonSelected}
                 people={this.props.people}
               />
@@ -123,7 +105,7 @@ const mapStateToProps = ({ people }) => {
   return {
     stateType: people.type,
     selectedPerson: people.selectedPerson,
-    people: people.items
+    people: people.people
   };
 };
 

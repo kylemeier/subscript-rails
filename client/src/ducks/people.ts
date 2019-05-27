@@ -18,8 +18,9 @@ interface Ready {
   people: Person[];
 }
 
-interface Searching {
-  type: "searching";
+interface Inactive {
+  type: "inactive";
+  people: Person[];
 }
 
 interface PersonSelected {
@@ -41,6 +42,11 @@ const readyState = (people: Person[]): Ready => ({
   people
 });
 
+const inactiveState = (people: Person[]): Inactive => ({
+  type: "inactive",
+  people
+});
+
 const personSelectedState = (
   people: Person[],
   selectedPerson: Person
@@ -50,7 +56,7 @@ const personSelectedState = (
   selectedPerson
 });
 
-export type State = Waiting | Loading | Ready | PersonSelected;
+export type State = Waiting | Loading | Ready | Inactive | PersonSelected;
 
 type ActionType =
   | "PEOPLE_REQUEST"
@@ -67,9 +73,29 @@ interface GenericAction {
   };
 }
 
+interface PeopleDeactivate {
+  type: "PEOPLE_DEACTIVATE";
+}
+
+interface PeopleActivate {
+  type: "PEOPLE_ACTIVATE";
+}
+
 interface PersonSelectAction {
   type: "PEOPLE_SELECT";
   person: Person;
+}
+
+export function deactivate(): PeopleDeactivate {
+  return {
+    type: "PEOPLE_DEACTIVATE"
+  };
+}
+
+export function activate(): PeopleActivate {
+  return {
+    type: "PEOPLE_ACTIVATE"
+  };
 }
 
 export function selectPerson(person: Person): PersonSelectAction {
@@ -79,7 +105,11 @@ export function selectPerson(person: Person): PersonSelectAction {
   };
 }
 
-type Action = GenericAction | PersonSelectAction;
+type Action =
+  | GenericAction
+  | PeopleDeactivate
+  | PeopleActivate
+  | PersonSelectAction;
 
 const waiting = (state: Waiting, action: Action) => {
   switch (action.type) {
@@ -104,8 +134,19 @@ const ready = (state: Ready, action: Action) => {
   switch (action.type) {
     case "PEOPLE_REQUEST":
       return loadingState();
+    case "PEOPLE_DEACTIVATE":
+      return inactiveState(state.people);
     case "PEOPLE_SELECT":
       return personSelectedState(state.people, action.person);
+    default:
+      return state;
+  }
+};
+
+const inactive = (state: Inactive, action: Action) => {
+  switch (action.type) {
+    case "PEOPLE_ACTIVATE":
+      return readyState(state.people);
     default:
       return state;
   }
@@ -123,6 +164,8 @@ export default function(state: State = waitingState(), action: Action): State {
       return loading(state, action);
     case "ready":
       return ready(state, action);
+    case "inactive":
+      return inactive(state, action);
     case "person-selected":
       return personSelected(state, action);
     default:
